@@ -1146,7 +1146,6 @@ void dance_7_finished(tap_dance_state_t *state, void *user_data) {
         case TD_DOUBLE_HOLD:
             register_code(KC_LCTL);
             register_code(KC_LALT);
-            register_code(KC_LSFT);
             register_code(KC_7);
             break;
         default: break;
@@ -1163,7 +1162,6 @@ void dance_7_reset(tap_dance_state_t *state, void *user_data) {
             break;
         case TD_DOUBLE_HOLD:
             unregister_code(KC_7);
-            unregister_code(KC_LSFT);
             unregister_code(KC_LALT);
             unregister_code(KC_LCTL);
             break;
@@ -2351,12 +2349,12 @@ static void print_status_logo(void) {
     }
 }
 
-// oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-//     if (is_keyboard_master()) {
-//         return OLED_ROTATION_270;
-//     }
-//     return rotation;
-// }
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (is_keyboard_master()) {
+        return OLED_ROTATION_0;
+    }
+    return rotation;
+}
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
